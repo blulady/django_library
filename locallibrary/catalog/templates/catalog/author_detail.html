@@ -9,7 +9,7 @@
 
   {% for book in author.book_set.all %}
     <ul>
-        <a href="{{ book.author.get_absolute_url }}">{{ book }}</a>
+        <a href="{{ book.get_absolute_url }}">{{ book }}</a>
       <p>{{ book.summary }}</p>
     </ul>
   {% endfor %}
