@@ -61,6 +61,10 @@ class BookInstance(models.Model):
     due_back = models.DateField(null=True, blank=True)
     borrower = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
 
+    class Meta:
+        ordering = ['due_back']
+        permissions = (("can_mark_returned", "Set book as returned"),)
+
     @property
     def is_overdue(self):
         """Determines if the book is overdue based on due date and current date"""
@@ -80,10 +84,6 @@ class BookInstance(models.Model):
         default='m',
         help_text='Book availability',
     )
-
-    class Meta:
-        ordering = ['due_back']
-        permissions = (("can_mark_returned", "Set book as returned"),)
 
     def __str__(self):
         """String for representing the Model object."""
