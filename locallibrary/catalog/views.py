@@ -74,6 +74,8 @@ class LoanedBooksByLibrarianView(PermissionRequiredMixin, generic.ListView):
         return BookInstance.objects.filter(status__exact='o').order_by("due_back")
 
 
+@login_required()
+@permission_required('catalog.can_mark_returned', raise_exception=True)
 def renew_book_librarian(request, pk):
     book_instance = get_object_or_404(BookInstance, pk=pk)
     if request.method == 'POST':
@@ -88,12 +90,12 @@ def renew_book_librarian(request, pk):
             return HttpResponseRedirect(reverse('all-borrowed'))
 
         # if this a get (or any other method) create the default form
-        else:
-            proposed_renewal_date = datetime.date.today() + datetime.timedelta(weeks=3)
-            form = RenewBookForm(initial={'renewal_date': proposed_renewal_date})
+    else:
+        proposed_renewal_date = datetime.date.today() + datetime.timedelta(weeks=3)
+        form = RenewBookForm(initial={'renewal_date': proposed_renewal_date})
 
-            context = {
-                'form': form,
-                'book_instance': book_instance,
-            }
-            return render(request, 'catalog/book_renew_librarian.html', context)
+        context = {
+            'form': form,
+            'book_instance': book_instance,
+        }
+        return render(request, 'catalog/book_renew_librarian.html', context)
