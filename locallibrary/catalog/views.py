@@ -134,7 +134,8 @@ class BookDelete(DeleteView):
 
 class BookInstanceCreate(CreateView):
     model = BookInstance
-    fields = ['id', 'book', 'imprint', 'language', 'due_back', 'borrower']
+    fields = ['id', 'book', 'imprint', 'language', 'due_back', 'borrower', 'status']
+    success_url = reverse_lazy('books')
 
 
 class BookInstanceUpdate(UpdateView):
