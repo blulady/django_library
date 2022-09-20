@@ -12,8 +12,10 @@
         <a href="{{ book.get_absolute_url }}">{{ book }}</a>
       <p>{{ book.summary }}</p>
       <br><br><br>
-      <p><a href="{%url 'author-update' author.id %}"> Update Author Information </a> </p>
-      <p><a href="{%url 'author-delete' author.id %}"> Delete Author </a></p>
+      {% if user.is_staff %}
+        <p><a href="{%url 'author-update' author.id %}"> Update Author Information </a> </p>
+       <p><a href="{%url 'author-delete' author.id %}"> Delete Author </a></p>
+      {% endif %}
     </ul>
   {% endfor %}
 

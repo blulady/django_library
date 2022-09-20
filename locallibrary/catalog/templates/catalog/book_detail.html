@@ -10,6 +10,12 @@
   <p><strong>Language:</strong> {{ book.language }}</p>
   <p><strong>Genre:</strong> {{ book.genre.all|join:", " }}</p>
 
+    <br>
+ {% if user.is_staff %}
+  <p><a href="{%url 'book-update' book.id %}"> Update Book Information </a> </p>
+  <p><a href="{%url 'book-delete' book.id %}"> Delete Book </a></p>
+ {% endif %}
+
   <div style="margin-left:20px;margin-top:20px">
     <h4>Copies</h4>
 
@@ -24,5 +30,6 @@
       <p><strong>Imprint:</strong> {{ copy.imprint }}</p>
       <p class="text-muted"><strong>Id:</strong> {{ copy.id }}</p>
     {% endfor %}
+
   </div>
 {% endblock %}
