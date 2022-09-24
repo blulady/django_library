@@ -29,6 +29,12 @@
       {% endif %}
       <p><strong>Imprint:</strong> {{ copy.imprint }}</p>
       <p class="text-muted"><strong>Id:</strong> {{ copy.id }}</p>
+
+      {% if user.is_staff %}
+      <p><a href="{%url 'bookinstance-update' copy.id %}"> Update Copy </a></p>
+      <p><a href="{%url 'bookinstance-delete' copy.id %}"> Delete Copy </a></p>
+      {% endif %}
+
     {% endfor %}
 
   </div>

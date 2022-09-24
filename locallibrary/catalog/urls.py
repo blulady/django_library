@@ -17,6 +17,6 @@ urlpatterns = [
     path('book/<int:pk>/update/', views.BookUpdate.as_view(), name='book-update'),
     path('book/<int:pk>/delete', views.BookDelete.as_view(), name='book-delete'),
     path('bookinstance/create/', views.BookInstanceCreate.as_view(), name='bookinstance-create'),
-    path('bookinstance/<int:pk>/update/', views.BookInstanceUpdate.as_view(), name='bookinstance-update'),
-    path('bookinstance/<int:pk>/delete/', views.BookInstanceCreate.as_view(), name="bookinstance-delete")
+    path('bookinstance/<uuid:pk>/update/', views.BookInstanceUpdate.as_view(), name='bookinstance-update'),
+    path('bookinstance/<uuid:pk>/delete/', views.BookInstanceDelete.as_view(), name="bookinstance-delete")
 ]
